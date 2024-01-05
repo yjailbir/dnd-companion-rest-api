@@ -38,7 +38,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateuser
+    public ResponseEntity<?> authenticateUser
             (@RequestBody AuthRequestDto loginRequest) {
 
         org.springframework.security.core.Authentication authentication = authenticationManager.authenticate

@@ -47,7 +47,8 @@ public class SecurityConfig {
                         .permitAll()
                         ///////
                         .requestMatchers("/api/test/**")
-                        .permitAll().anyRequest().authenticated())
+                        .permitAll().anyRequest().authenticated()
+                )
                         //////
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
