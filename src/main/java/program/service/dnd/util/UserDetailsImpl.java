@@ -1,4 +1,4 @@
-package program.service.dnd.data.service;
+package program.service.dnd.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +16,7 @@ import java.util.Objects;
 public class UserDetailsImpl implements UserDetails {
     //private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Integer id;
 
     private String username;
 

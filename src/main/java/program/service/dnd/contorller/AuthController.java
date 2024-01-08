@@ -12,27 +12,27 @@ import program.service.dnd.data.dto.AuthRequestDto;
 import program.service.dnd.data.dto.AuthResponseDto;
 import program.service.dnd.data.dto.MessageResponseDto;
 import program.service.dnd.data.entity.User;
-import program.service.dnd.data.repository.UserRepository;
-import program.service.dnd.data.service.UserDetailsImpl;
+import program.service.dnd.data.service.UserService;
+import program.service.dnd.util.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    AuthenticationManager authenticationManager;
-    UserRepository userRepository;
-    PasswordEncoder encoder;
-    JwtUtils jwtUtils;
+    private final AuthenticationManager authenticationManager;
+    private final UserService userService;
+    private final PasswordEncoder encoder;
+    private final JwtUtils jwtUtils;
 
     @Autowired
     public AuthController(
             AuthenticationManager authenticationManager,
-            UserRepository userRepository,
+            UserService userService,
             PasswordEncoder passwordEncoder,
             JwtUtils jwtUtils
     ){
         this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
+        this.userService = userService;
         this.encoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
     }
@@ -62,7 +62,7 @@ public class AuthController {
     public ResponseEntity<?> registerUser
             (@RequestBody AuthRequestDto signUpRequest) {
 
-        if (userRepository.existsByUsername(signUpRequest
+        if (userService.existsByUsername(signUpRequest
                 .getUsername())) {
 
             return ResponseEntity.badRequest()
@@ -74,7 +74,7 @@ public class AuthController {
         User user = new User(signUpRequest.getUsername(),
                 encoder.encode(signUpRequest.getPassword()));
 
-        userRepository.save(user);
+        userService.save(user);
 
         return ResponseEntity
                 .ok(new MessageResponseDto("user registered successfully!"));

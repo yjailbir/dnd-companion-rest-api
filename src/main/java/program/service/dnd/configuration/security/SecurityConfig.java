@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import program.service.dnd.data.service.UserDetailsServiceImpl;
+import program.service.dnd.data.service.UserService;
 
 import java.util.List;
 
@@ -27,12 +27,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
     private final AuthEntryPointJwt unauthorizedHandler;
-    UserDetailsServiceImpl userDetailsService;
+    UserService userService;
 
     @Autowired
-    public SecurityConfig(AuthEntryPointJwt authEntryPointJwt, UserDetailsServiceImpl userDetailsService){
+    public SecurityConfig(AuthEntryPointJwt authEntryPointJwt, UserService userService){
         this.unauthorizedHandler = authEntryPointJwt;
-        this.userDetailsService = userDetailsService;
+        this.userService = userService;
     }
 
     @Bean
@@ -47,9 +47,12 @@ public class SecurityConfig {
                         .permitAll()
                         ///////
                         .requestMatchers("/api/test/**")
-                        .permitAll().anyRequest().authenticated()
-                )
+                        .permitAll()
                         //////
+                        .requestMatchers("/api/character/**")
+                        .permitAll()
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 

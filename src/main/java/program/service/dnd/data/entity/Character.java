@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(name = "user_id")
-    private Long user_id;
+    private Integer userId;
     @Column(name = "name")
     private String name;
     @Column(name = "class")
@@ -21,7 +21,7 @@ public class Character {
     @Column(name = "race")
     private String race;
     @Column(name = "image_link")
-    private String image_link;
+    private String imageLink;
     @Column(name = "lvl")
     private Integer lvl;
     @Column(name = "experience")
@@ -42,7 +42,36 @@ public class Character {
     private Integer charisma;
     @Column(name = "notes")
     private String notes;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private Modifiers modifiers;
+
+    public Character(Integer userId, String name, String characterClass, String race, String imageLink) {
+        this.userId = userId;
+        this.name = name;
+        this.characterClass = characterClass;
+        this.race = race;
+        this.imageLink = imageLink;
+
+        this.lvl = 1;
+        this.experience = 0;
+
+        switch (characterClass) {
+            case "Бард", "Жрец", "Друид", "Монах", "Плут", "Колдун" -> this.health = 8;
+            case "Варвар" -> this.health = 12;
+            case "Воин", "Следопыт", "Паладин" -> this.health = 10;
+            case "Чародей", "Волшебник" -> this.health = 6;
+
+        }
+
+        this.strength = 10;
+        this.physique = 10;
+        this.dexterity = 10;
+        this.wisdom = 10;
+        this.intelligence = 10;
+        this.charisma = 10;
+        this.notes = "";
+        this.modifiers = new Modifiers();
+        this.modifiers.setDefaults();
+    }
 }

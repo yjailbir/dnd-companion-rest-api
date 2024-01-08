@@ -5,6 +5,6 @@ import program.service.dnd.data.entity.Character;
 
 import java.util.Optional;
 
-public interface CharacterRepository extends JpaRepository<Character, Long> {
+public interface CharacterRepository extends JpaRepository<Character, Integer> {
 
 }

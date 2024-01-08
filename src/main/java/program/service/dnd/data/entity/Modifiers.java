@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Modifiers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(name = "athletics")
     private Integer athletics;
     @Column(name = "acrobatics")
@@ -48,4 +48,28 @@ public class Modifiers {
     private Integer fraud;
     @Column(name = "conviction")
     private Integer conviction;
+
+    @OneToOne(mappedBy = "modifiers")
+    private Character character;
+
+    public void setDefaults(){
+        this.athletics = 0;
+        this.acrobatics = 0;
+        this.sleightOfHand = 0;
+        this.stealth = 0;
+        this.perception = 0;
+        this.survival = 0;
+        this.medicine = 0;
+        this.insight = 0;
+        this.animalCare = 0;
+        this.analysis = 0;
+        this.history = 0;
+        this.magic = 0;
+        this.nature = 0;
+        this.religion = 0;
+        this.performance = 0;
+        this.intimidation = 0;
+        this.fraud = 0;
+        this.conviction = 0;
+    }
 }
