@@ -3,11 +3,10 @@ package program.service.dnd.contorller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import program.service.dnd.data.dto.AllCharactersResponseDto;
+import program.service.dnd.data.dto.CharacterShortInfoDto;
 import program.service.dnd.data.entity.Character;
 import program.service.dnd.data.entity.User;
 import program.service.dnd.data.service.CharacterService;
@@ -17,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/character")
@@ -28,6 +28,45 @@ public class CharacterController {
     public CharacterController(UserService userService, CharacterService characterService){
         this.userService = userService;
         this.characterService = characterService;
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<?> getUsersCharacters(HttpServletRequest request){
+        User user = userService.getUserFromRequest(request);
+        Integer userId = user.getId();
+
+        List<Character> characters = characterService.getAllUserCharacters(userId);
+        List<CharacterShortInfoDto> shortInfos = new ArrayList<>();
+
+        for(Character character: characters){
+            CharacterShortInfoDto dto = new CharacterShortInfoDto();
+            dto.setCharacterClass(character.getCharacterClass());
+            dto.setRace(character.getRace());
+            dto.setName(character.getName());
+            dto.setImageLink(character.getImageLink());
+            dto.setCharacterLink("/api/character/" + character.getId().toString());
+
+            shortInfos.add(dto);
+        }
+
+        AllCharactersResponseDto allCharactersResponseDto = new AllCharactersResponseDto(shortInfos);
+
+        return ResponseEntity.ok(allCharactersResponseDto);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCharacter(@PathVariable("id") Integer characterId, HttpServletRequest request){
+        User user = userService.getUserFromRequest(request);
+        Integer userId = user.getId();
+
+        Optional<Character> character = characterService.getCharacterById(characterId);
+
+       if(character.isEmpty() || !character.get().getUserId().equals(userId)){
+           Map<String, String> map = new HashMap<>();
+           map.put("error", "Персонаж не найден");
+           return ResponseEntity.ok(map);
+       }
+       else return ResponseEntity.ok(character);
     }
 
     @PostMapping("/create")

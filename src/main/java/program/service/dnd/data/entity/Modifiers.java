@@ -1,5 +1,6 @@
 package program.service.dnd.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "modifiers")
 @NoArgsConstructor
+@JsonIgnoreProperties("character")
 public class Modifiers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -15,8 +15,7 @@ public class ModifiersService {
         this.modifiersRepository = modifiersRepository;
     }
 
-    @Transactional
-    public void save(Modifiers modifiers){
-        modifiersRepository.save(modifiers);
+    public Modifiers getById(Integer id){
+        return modifiersRepository.findById(id).get();
     }
 }

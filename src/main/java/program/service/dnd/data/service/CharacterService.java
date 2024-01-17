@@ -7,6 +7,9 @@ import program.service.dnd.data.entity.Character;
 import program.service.dnd.data.repository.CharacterRepository;
 import program.service.dnd.data.repository.ModifiersRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Component
 public class CharacterService {
     private final CharacterRepository characterRepository;
@@ -18,8 +21,12 @@ public class CharacterService {
         this.modifiersRepository = modifiersRepository;
     }
 
-    public Character findCharacterById(Integer id){
-        return characterRepository.findById(id).get();
+    public List<Character> getAllUserCharacters(Integer id){
+        return characterRepository.getAllByUserId(id);
+    }
+
+    public Optional<Character> getCharacterById(Integer id){
+        return characterRepository.findById(id);
     }
 
     @Transactional
