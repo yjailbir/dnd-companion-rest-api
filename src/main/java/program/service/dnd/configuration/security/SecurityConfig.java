@@ -29,6 +29,20 @@ public class SecurityConfig {
     private final AuthEntryPointJwt unauthorizedHandler;
     UserService userService;
 
+    private static final String[] AUTH_WHITELIST = {
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs/**",
+            "/api/public/**",
+            "/api/public/authenticate",
+            "/actuator/*",
+            "/swagger-ui/**"
+    };
+
     @Autowired
     public SecurityConfig(AuthEntryPointJwt authEntryPointJwt, UserService userService){
         this.unauthorizedHandler = authEntryPointJwt;
@@ -50,6 +64,8 @@ public class SecurityConfig {
                         .permitAll()
                         //////
                         .requestMatchers("/api/character/**")
+                        .permitAll()
+                        .requestMatchers(AUTH_WHITELIST)
                         .permitAll()
                         .anyRequest().authenticated()
                 )

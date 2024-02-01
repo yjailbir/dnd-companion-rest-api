@@ -74,4 +74,38 @@ public class Character {
         this.modifiers = new Modifiers();
         this.modifiers.setDefaults();
     }
+
+    public void updateStat(String statName, Object statValue){
+        switch (statName){
+            case "name" -> setName(statValue.toString());
+            case "lvl" -> setLvl((Integer) statValue);
+            case "experience" -> setExperience((Integer) statValue);
+            case "health" -> setHealth((Integer) statValue);
+            case "strength" -> setStrength((Integer) statValue);
+            case "physique" -> setPhysique((Integer) statValue);
+            case "dexterity" -> setDexterity((Integer) statValue);
+            case "wisdom" -> setWisdom((Integer) statValue);
+            case "intelligence" -> setIntelligence((Integer) statValue);
+            case "charisma" -> setCharisma((Integer) statValue);
+            case "notes" -> setNotes(statValue.toString());
+            case "athletics" -> getModifiers().setAthletics((Integer) statValue);
+            case "acrobatics" -> getModifiers().setAcrobatics((Integer) statValue);
+            case "sleight_of_hand" -> getModifiers().setSleightOfHand((Integer) statValue);
+            case "stealth" -> getModifiers().setStealth((Integer) statValue);
+            case "perception" -> getModifiers().setPerception((Integer) statValue);
+            case "survival" -> getModifiers().setSurvival((Integer) statValue);
+            case "medicine" -> getModifiers().setMedicine((Integer) statValue);
+            case "insight" -> getModifiers().setInsight((Integer) statValue);
+            case "animal_care" -> getModifiers().setAnimalCare((Integer) statValue);
+            case "analysis" -> getModifiers().setAnalysis((Integer) statValue);
+            case "history" -> getModifiers().setHistory((Integer) statValue);
+            case "magic" -> getModifiers().setMagic((Integer) statValue);
+            case "nature" -> getModifiers().setNature((Integer) statValue);
+            case "religion" -> getModifiers().setReligion((Integer) statValue);
+            case "performance" -> getModifiers().setPerformance((Integer) statValue);
+            case "intimidation" -> getModifiers().setIntimidation((Integer) statValue);
+            case "fraud" -> getModifiers().setFraud((Integer) statValue);
+            case "conviction" -> getModifiers().setConviction((Integer) statValue);
+        }
+    }
 }
