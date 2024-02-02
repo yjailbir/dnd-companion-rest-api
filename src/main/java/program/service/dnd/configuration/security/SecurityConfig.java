@@ -59,14 +59,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/auth/**")
                         .permitAll()
-                        ///////
-                        .requestMatchers("/api/test/**")
-                        .permitAll()
-                        //////
-                        .requestMatchers("/api/character/**")
-                        .permitAll()
                         .requestMatchers(AUTH_WHITELIST)
                         .permitAll()
+                        .requestMatchers("/api/image/**")
+                        .permitAll()
+                        //.requestMatchers("/api/character/**")
+                        //.permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

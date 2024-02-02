@@ -83,9 +83,11 @@ public class CharacterController {
 
         if(image != null){
             String resourcesPath = "src/main/resources/static/images";
-            String originalFilename = image.getOriginalFilename();
-            Path filePath = Path.of(resourcesPath, originalFilename);
-            imageLink = filePath.toString();
+            String filename = user.getId().toString() + name + image.getOriginalFilename();
+            filename = filename.replaceAll(" ", "");
+            Path filePath = Path.of(resourcesPath, filename);
+            //FIXME: change host before deploy
+            imageLink = "http://localhost:8080/api/image/" + filename;
             Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         }
 
