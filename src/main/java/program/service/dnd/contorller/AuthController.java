@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import program.service.dnd.configuration.security.JwtUtils;
 import program.service.dnd.data.dto.AuthRequestDto;
 import program.service.dnd.data.dto.AuthResponseDto;
-import program.service.dnd.data.dto.MessageResponseDto;
 import program.service.dnd.data.entity.User;
 import program.service.dnd.data.service.UserService;
 import program.service.dnd.util.UserDetailsImpl;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -65,9 +67,9 @@ public class AuthController {
         if (userService.existsByUsername(signUpRequest
                 .getUsername())) {
 
-            return ResponseEntity.badRequest()
-                    .body(new MessageResponseDto
-                            ("Error: username is already taken!"));
+            Map<String, String> map = new HashMap<>();
+            map.put("error", "username is already taken!");
+            return ResponseEntity.badRequest().body(map);
         }
 
         // Create new user account
@@ -76,7 +78,8 @@ public class AuthController {
 
         userService.save(user);
 
-        return ResponseEntity
-                .ok(new MessageResponseDto("user registered successfully!"));
+        Map<String, String> map = new HashMap<>();
+        map.put("message", "user registered successfully");
+        return ResponseEntity.ok(map);
     }
 }

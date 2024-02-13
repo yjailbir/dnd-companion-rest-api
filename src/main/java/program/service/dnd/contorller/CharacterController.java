@@ -1,7 +1,9 @@
 package program.service.dnd.contorller;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -86,8 +88,7 @@ public class CharacterController {
             String filename = user.getId().toString() + name + image.getOriginalFilename();
             filename = filename.replaceAll(" ", "");
             Path filePath = Path.of(resourcesPath, filename);
-            //FIXME: change host before deploy
-            imageLink = "http://localhost:8080/api/image/" + filename;
+            imageLink = "http://80.76.32.233:8080/api/image/" + filename;
             Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         }
 
