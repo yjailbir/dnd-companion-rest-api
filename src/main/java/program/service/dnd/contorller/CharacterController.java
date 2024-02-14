@@ -88,7 +88,7 @@ public class CharacterController {
             String filename = user.getId().toString() + name + image.getOriginalFilename();
             filename = filename.replaceAll(" ", "");
             Path filePath = Path.of(resourcesPath, filename);
-            imageLink = "http://80.76.32.233:8080/api/image/" + filename;
+            imageLink = "http://95.214.11.83:8080/api/image/" + filename;
             Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         }
 
