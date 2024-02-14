@@ -1,9 +1,7 @@
 package program.service.dnd.contorller;
 
-import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,7 +45,7 @@ public class CharacterController {
             dto.setRace(character.getRace());
             dto.setName(character.getName());
             dto.setImageLink(character.getImageLink());
-            dto.setCharacterLink("/api/character/" + character.getId().toString());
+            dto.setCharacterLink("http://95.214.11.83:8080/api/character/" + character.getId().toString());
 
             shortInfos.add(dto);
         }

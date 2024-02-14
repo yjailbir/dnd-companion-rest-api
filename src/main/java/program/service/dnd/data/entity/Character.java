@@ -26,6 +26,7 @@ public class Character {
     private Integer lvl;
     @Column(name = "experience")
     private Integer experience;
+
     @Column(name = "health")
     private Integer health;
     @Column(name = "strength")
