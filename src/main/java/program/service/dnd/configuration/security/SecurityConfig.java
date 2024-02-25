@@ -52,7 +52,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http)
             throws Exception {
         http
-                .cors(withDefaults())
+                //.cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable).exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()
                 .authorizeHttpRequests(requests -> requests
