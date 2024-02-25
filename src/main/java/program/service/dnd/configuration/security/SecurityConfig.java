@@ -54,8 +54,8 @@ public class SecurityConfig {
             throws Exception {
         http
                 .cors(withDefaults())
-                .csrf(AbstractHttpConfigurer::disable).exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler).and()
+                .csrf(AbstractHttpConfigurer::disable)//.exceptionHandling()
+                //.authenticationEntryPoint(unauthorizedHandler).and()
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/auth/**")
                         .permitAll()
@@ -91,7 +91,7 @@ public class SecurityConfig {
                 .getAuthenticationManager();
     }
 
-    /*@Bean
+    @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(List.of("*"));
@@ -100,12 +100,12 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
-    }*/
+    }
 
-    @Bean
+    /*@Bean
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
-    }
+    }*/
 }
