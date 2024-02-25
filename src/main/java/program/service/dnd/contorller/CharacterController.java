@@ -45,7 +45,7 @@ public class CharacterController {
             dto.setRace(character.getRace());
             dto.setName(character.getName());
             dto.setImageLink(character.getImageLink());
-            dto.setCharacterLink("http://95.214.11.83:443/api/character/" + character.getId().toString());
+            dto.setCharacterLink("http://95.214.11.83:8080/api/character/" + character.getId().toString());
 
             shortInfos.add(dto);
         }
@@ -86,7 +86,7 @@ public class CharacterController {
             String filename = user.getId().toString() + name + image.getOriginalFilename();
             filename = filename.replaceAll(" ", "");
             Path filePath = Path.of(resourcesPath, filename);
-            imageLink = "http://95.214.11.83:443/api/image/" + filename;
+            imageLink = "http://95.214.11.83:8080/api/image/" + filename;
             Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         }
 
