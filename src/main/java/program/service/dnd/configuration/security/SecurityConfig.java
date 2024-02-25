@@ -24,7 +24,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
     private final AuthEntryPointJwt unauthorizedHandler;
     UserService userService;
@@ -54,8 +53,8 @@ public class SecurityConfig {
             throws Exception {
         http
                 .cors(withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)//.exceptionHandling()
-                //.authenticationEntryPoint(unauthorizedHandler).and()
+                .csrf(AbstractHttpConfigurer::disable).exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler).and()
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/auth/**")
                         .permitAll()
@@ -97,15 +96,9 @@ public class SecurityConfig {
         corsConfiguration.setAllowedOrigins(List.of("*"));
         corsConfiguration.setAllowedMethods(List.of("*"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
+        corsConfiguration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
     }
-
-    /*@Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
-    }*/
 }
