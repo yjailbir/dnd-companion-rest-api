@@ -86,7 +86,7 @@ public class CharacterController {
         String imageLink = null;
 
         if(image != null){
-            String resourcesPath = "src/main/resources/static/images";
+            String resourcesPath = "/home/dnd/dnd-companion-rest-api/src/main/resources/static/images";
             String filename = user.getId().toString() + name + image.getOriginalFilename();
             filename = filename.replaceAll(" ", "");
             Path filePath = Path.of(resourcesPath, filename);
