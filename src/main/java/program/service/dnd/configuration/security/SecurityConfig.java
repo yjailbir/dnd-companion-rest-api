@@ -55,12 +55,11 @@ public class SecurityConfig{
                 .csrf(AbstractHttpConfigurer::disable).exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()
                 .authorizeHttpRequests(requests -> requests
-                        /*.requestMatchers("/api/auth/**")
+                        .requestMatchers("/api/auth/**")
                         .permitAll()
                         .requestMatchers(AUTH_WHITELIST)
-                        .permitAll()*/
-                        //.requestMatchers("/api/image/**")
-                        .requestMatchers("/api/**")
+                        .permitAll()
+                        .requestMatchers("/api/image/**")
                         .permitAll()
                         //.requestMatchers("/api/character/**")
                         //.permitAll()
