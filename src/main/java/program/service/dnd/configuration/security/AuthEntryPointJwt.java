@@ -20,6 +20,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         //System.out.println(request.getUserPrincipal().toString());
+        logger.info("Commence void was called");
     }
 
    /* @Override

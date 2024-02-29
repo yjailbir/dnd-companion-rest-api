@@ -1,10 +1,13 @@
 package program.service.dnd.contorller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import program.service.dnd.configuration.security.AuthTokenFilter;
 import program.service.dnd.data.dto.AllCharactersResponseDto;
 import program.service.dnd.data.dto.CharacterShortInfoDto;
 import program.service.dnd.data.dto.UpdateCharacterInfoDto;
@@ -24,6 +27,7 @@ import java.util.*;
 public class CharacterController {
     private final UserService userService;
     private final CharacterService characterService;
+    private static final Logger logger = LoggerFactory.getLogger(CharacterController.class);
 
     @Autowired
     public CharacterController(UserService userService, CharacterService characterService){
@@ -92,6 +96,8 @@ public class CharacterController {
 
         Character character = new Character(user.getId(), name, characterClass, race, imageLink);
         characterService.save(character);
+
+        logger.info("Character " + character.getName() + " was created");
 
         return ResponseEntity.ok(character);
     }
