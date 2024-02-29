@@ -20,11 +20,10 @@ import program.service.dnd.data.service.UserService;
 
 import java.util.List;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig{
     private final AuthEntryPointJwt unauthorizedHandler;
     UserService userService;
 
@@ -56,11 +55,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable).exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/auth/**")
+                        /*.requestMatchers("/api/auth/**")
                         .permitAll()
                         .requestMatchers(AUTH_WHITELIST)
-                        .permitAll()
-                        .requestMatchers("/api/image/**")
+                        .permitAll()*/
+                        //.requestMatchers("/api/image/**")
+                        .requestMatchers("/api/**")
                         .permitAll()
                         //.requestMatchers("/api/character/**")
                         //.permitAll()
@@ -89,6 +89,7 @@ public class SecurityConfig {
         return authenticationConfiguration
                 .getAuthenticationManager();
     }
+
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
