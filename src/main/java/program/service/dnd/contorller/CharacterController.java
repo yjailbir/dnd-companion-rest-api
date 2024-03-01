@@ -86,7 +86,7 @@ public class CharacterController {
 
         if(image != null){
             String resourcesPath = "/home/dnd/dnd-images";
-            String filename = user.getId().toString() + image.getOriginalFilename() + new Date();
+            String filename = user.getId().toString() + "_" + new Date() + "_" + image.getOriginalFilename();
             filename = filename.replaceAll(" ", "");
             Path filePath = Path.of(resourcesPath, filename);
             imageLink = "http://95.214.11.83:8080/api/image/" + filename;
