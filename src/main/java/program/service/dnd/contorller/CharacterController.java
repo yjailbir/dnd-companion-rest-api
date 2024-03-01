@@ -27,7 +27,6 @@ import java.util.*;
 public class CharacterController {
     private final UserService userService;
     private final CharacterService characterService;
-    private static final Logger logger = LoggerFactory.getLogger(CharacterController.class);
 
     @Autowired
     public CharacterController(UserService userService, CharacterService characterService){
@@ -86,8 +85,8 @@ public class CharacterController {
         String imageLink = null;
 
         if(image != null){
-            String resourcesPath = "/home/dnd/dnd-companion-rest-api/src/main/resources/static/images";
-            String filename = user.getId().toString() + name + image.getOriginalFilename();
+            String resourcesPath = "/home/dnd/dnd-images";
+            String filename = user.getId().toString() + image.getOriginalFilename() + new Date();
             filename = filename.replaceAll(" ", "");
             Path filePath = Path.of(resourcesPath, filename);
             imageLink = "http://95.214.11.83:8080/api/image/" + filename;
@@ -96,8 +95,6 @@ public class CharacterController {
 
         Character character = new Character(user.getId(), name, characterClass, race, imageLink);
         characterService.save(character);
-
-        logger.info("Character " + character.getName() + " was created");
 
         return ResponseEntity.ok(character);
     }

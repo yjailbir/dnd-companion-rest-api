@@ -17,7 +17,7 @@ import java.nio.file.Files;
 public class ImagesController {
     @GetMapping("/{imgName}")
     public ResponseEntity<byte[]> getImage(@PathVariable("imgName") String imgName) throws IOException {
-        String imageDirectory = "src/main/resources/static/images/";
+        String imageDirectory = "/home/dnd/dnd-images/";
         File imgFile = new File(imageDirectory + imgName);
 
         byte[] bytes = Files.readAllBytes(imgFile.toPath());
