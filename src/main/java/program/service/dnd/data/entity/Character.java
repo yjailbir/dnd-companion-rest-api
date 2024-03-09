@@ -78,6 +78,7 @@ public class Character {
 
     public void updateStat(String statName, Object statValue){
         switch (statName){
+            case "characterClass" -> setCharacterClass(statValue.toString());
             case "name" -> setName(statValue.toString());
             case "lvl" -> setLvl((Integer) statValue);
             case "experience" -> setExperience((Integer) statValue);
@@ -91,13 +92,13 @@ public class Character {
             case "notes" -> setNotes(statValue.toString());
             case "athletics" -> getModifiers().setAthletics((Integer) statValue);
             case "acrobatics" -> getModifiers().setAcrobatics((Integer) statValue);
-            case "sleight_of_hand" -> getModifiers().setSleightOfHand((Integer) statValue);
+            case "sleightOfHand" -> getModifiers().setSleightOfHand((Integer) statValue);
             case "stealth" -> getModifiers().setStealth((Integer) statValue);
             case "perception" -> getModifiers().setPerception((Integer) statValue);
             case "survival" -> getModifiers().setSurvival((Integer) statValue);
             case "medicine" -> getModifiers().setMedicine((Integer) statValue);
             case "insight" -> getModifiers().setInsight((Integer) statValue);
-            case "animal_care" -> getModifiers().setAnimalCare((Integer) statValue);
+            case "animalCare" -> getModifiers().setAnimalCare((Integer) statValue);
             case "analysis" -> getModifiers().setAnalysis((Integer) statValue);
             case "history" -> getModifiers().setHistory((Integer) statValue);
             case "magic" -> getModifiers().setMagic((Integer) statValue);
