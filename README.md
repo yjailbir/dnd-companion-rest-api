@@ -122,7 +122,28 @@ form-data со следующими параметрами:
         "performance": integer,
         "intimidation": integer,
         "fraud": integer,
-        "conviction": integer
+        "conviction": integer,
+        "bonuses": {
+            "id": integer,
+            "athleticsBonus": integer,
+            "acrobaticsBonus": integer,
+            "sleightOfHandBonus": integer,
+            "stealthBonus": integer,
+            "perceptionBonus": integer,
+            "survivalBonus": integer,
+            "medicineBonus": integer,
+            "insightBonus": integer,
+            "animalCareBonus": integer,
+            "analysisBonus": integer,
+            "historyBonus": integer,
+            "magicBonus": integer,
+            "natureBonus": integer,
+            "religionBonus": integer,
+            "performanceBonus": integer,
+            "intimidationBonus": integer,
+            "fraudBonus": integer,
+            "convictionBonus": integer
+        }
     }
 }
 ```
@@ -170,7 +191,7 @@ PATCH: http://95.214.11.83:8080/api/character/update
 ```
 В newValues перечислить все характеристики, которые нужно изменить и их новые значения
 
-Это распространяется на модификаторы и все остальные характеристики
+Это распространяется на модификаторы, их бонусы и все остальные характеристики
 
 Для примера:
 
@@ -178,7 +199,8 @@ PATCH: http://95.214.11.83:8080/api/character/update
 {
     "characterId":4,
     "newValues":{
-        "acrobatics":-4
+        "acrobatics":-4,
+        "fraudBonus":2
     }
 }
 ```

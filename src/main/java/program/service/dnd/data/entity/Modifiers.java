@@ -54,6 +54,10 @@ public class Modifiers {
     @OneToOne(mappedBy = "modifiers")
     private Character character;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Bonuses bonuses;
+
     public void setDefaults(){
         this.athletics = 0;
         this.acrobatics = 0;
@@ -73,5 +77,7 @@ public class Modifiers {
         this.intimidation = 0;
         this.fraud = 0;
         this.conviction = 0;
+
+        this.bonuses.setDefaults();
     }
 }

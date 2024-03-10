@@ -73,11 +73,13 @@ public class Character {
         this.charisma = 10;
         this.notes = "";
         this.modifiers = new Modifiers();
+        this.modifiers.setBonuses(new Bonuses());
         this.modifiers.setDefaults();
     }
 
     public void updateStat(String statName, Object statValue){
         switch (statName){
+            case "race" -> setRace(statValue.toString());
             case "characterClass" -> setCharacterClass(statValue.toString());
             case "name" -> setName(statValue.toString());
             case "lvl" -> setLvl((Integer) statValue);
@@ -108,6 +110,24 @@ public class Character {
             case "intimidation" -> getModifiers().setIntimidation((Integer) statValue);
             case "fraud" -> getModifiers().setFraud((Integer) statValue);
             case "conviction" -> getModifiers().setConviction((Integer) statValue);
+            case "athleticsBonus" -> getModifiers().getBonuses().setAthleticsBonus((Integer) statValue);
+            case "acrobaticsBonus" -> getModifiers().getBonuses().setAcrobaticsBonus((Integer) statValue);
+            case "sleightOfHandBonus" -> getModifiers().getBonuses().setSleightOfHandBonus((Integer) statValue);
+            case "stealthBonus" -> getModifiers().getBonuses().setStealthBonus((Integer) statValue);
+            case "perceptionBonus" -> getModifiers().getBonuses().setPerceptionBonus((Integer) statValue);
+            case "survivalBonus" -> getModifiers().getBonuses().setSurvivalBonus((Integer) statValue);
+            case "medicineBonus" -> getModifiers().getBonuses().setMedicineBonus((Integer) statValue);
+            case "insightBonus" -> getModifiers().getBonuses().setInsightBonus((Integer) statValue);
+            case "animalCareBonus" -> getModifiers().getBonuses().setAnimalCareBonus((Integer) statValue);
+            case "analysisBonus" -> getModifiers().getBonuses().setAnalysisBonus((Integer) statValue);
+            case "historyBonus" -> getModifiers().getBonuses().setHistoryBonus((Integer) statValue);
+            case "magicBonus" -> getModifiers().getBonuses().setMagicBonus((Integer) statValue);
+            case "natureBonus" -> getModifiers().getBonuses().setNatureBonus((Integer) statValue);
+            case "religionBonus" -> getModifiers().getBonuses().setReligionBonus((Integer) statValue);
+            case "performanceBonus" -> getModifiers().getBonuses().setPerformanceBonus((Integer) statValue);
+            case "intimidationBonus" -> getModifiers().getBonuses().setIntimidationBonus((Integer) statValue);
+            case "fraudBonus" -> getModifiers().getBonuses().setFraudBonus((Integer) statValue);
+            case "convictionBonus" -> getModifiers().getBonuses().setConvictionBonus((Integer) statValue);
         }
     }
 }

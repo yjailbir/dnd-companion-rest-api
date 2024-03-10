@@ -1,3 +1,27 @@
+CREATE TABLE IF NOT EXISTS public.bonuses
+(
+    id serial,
+    athletics smallint NOT NULL,
+    acrobatics smallint NOT NULL,
+    sleight_of_hand smallint NOT NULL,
+    stealth smallint NOT NULL,
+    perception smallint NOT NULL,
+    survival smallint NOT NULL,
+    medicine smallint NOT NULL,
+    insight smallint NOT NULL,
+    animal_care smallint NOT NULL,
+    analysis smallint NOT NULL,
+    history smallint NOT NULL,
+    magic smallint NOT NULL,
+    nature smallint NOT NULL,
+    religion smallint NOT NULL,
+    performance smallint NOT NULL,
+    intimidation smallint NOT NULL,
+    fraud smallint NOT NULL,
+    conviction smallint NOT NULL,
+    CONSTRAINT bonuses_pkey PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS public.characters
 (
     id serial,
@@ -6,15 +30,15 @@ CREATE TABLE IF NOT EXISTS public.characters
     class text COLLATE pg_catalog."default" NOT NULL,
     race text COLLATE pg_catalog."default" NOT NULL,
     image_link text COLLATE pg_catalog."default",
-    lvl integer NOT NULL,
+    lvl smallint NOT NULL,
     experience integer NOT NULL,
-    health integer NOT NULL,
-    strength integer NOT NULL,
-    physique integer NOT NULL,
-    dexterity integer NOT NULL,
-    wisdom integer NOT NULL,
-    intelligence integer NOT NULL,
-    charisma integer NOT NULL,
+    health smallint NOT NULL,
+    strength smallint NOT NULL,
+    physique smallint NOT NULL,
+    dexterity smallint NOT NULL,
+    wisdom smallint NOT NULL,
+    intelligence smallint NOT NULL,
+    charisma smallint NOT NULL,
     notes text COLLATE pg_catalog."default",
     CONSTRAINT characters_pkey PRIMARY KEY (id)
 );
@@ -22,24 +46,24 @@ CREATE TABLE IF NOT EXISTS public.characters
 CREATE TABLE IF NOT EXISTS public.modifiers
 (
     id serial,
-    athletics integer NOT NULL,
-    acrobatics integer NOT NULL,
-    sleight_of_hand integer NOT NULL,
-    stealth integer NOT NULL,
-    perception integer NOT NULL,
-    survival integer NOT NULL,
-    medicine integer NOT NULL,
-    insight integer NOT NULL,
-    animal_care integer NOT NULL,
-    analysis integer NOT NULL,
-    history integer NOT NULL,
-    magic integer NOT NULL,
-    nature integer NOT NULL,
-    religion integer NOT NULL,
-    performance integer NOT NULL,
-    intimidation integer NOT NULL,
-    fraud integer NOT NULL,
-    conviction integer NOT NULL,
+    athletics smallint NOT NULL,
+    acrobatics smallint NOT NULL,
+    sleight_of_hand smallint NOT NULL,
+    stealth smallint NOT NULL,
+    perception smallint NOT NULL,
+    survival smallint NOT NULL,
+    medicine smallint NOT NULL,
+    insight smallint NOT NULL,
+    animal_care smallint NOT NULL,
+    analysis smallint NOT NULL,
+    history smallint NOT NULL,
+    magic smallint NOT NULL,
+    nature smallint NOT NULL,
+    religion smallint NOT NULL,
+    performance smallint NOT NULL,
+    intimidation smallint NOT NULL,
+    fraud smallint NOT NULL,
+    conviction smallint NOT NULL,
     CONSTRAINT modifiers_pkey PRIMARY KEY (id)
 );
 
@@ -53,17 +77,29 @@ CREATE TABLE IF NOT EXISTS public.users
 
 ALTER TABLE IF EXISTS public.characters
     ADD CONSTRAINT modifiers_id FOREIGN KEY (id)
-    REFERENCES public.modifiers (id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-       ON DELETE NO ACTION
-              NOT VALID;
+        REFERENCES public.modifiers (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID;
 CREATE INDEX IF NOT EXISTS characters_pkey
     ON public.characters(id);
 
 
 ALTER TABLE IF EXISTS public.characters
     ADD CONSTRAINT user_id FOREIGN KEY (user_id)
-    REFERENCES public.users (id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-       ON DELETE NO ACTION
-              NOT VALID;
+        REFERENCES public.users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.modifiers
+    ADD CONSTRAINT bonuses_id FOREIGN KEY (id)
+        REFERENCES public.bonuses (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID;
+CREATE INDEX IF NOT EXISTS modifiers_pkey
+    ON public.modifiers(id);
+
+END;
